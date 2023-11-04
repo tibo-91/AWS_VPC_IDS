@@ -29,6 +29,6 @@ ssh -i /home/ubuntu/.ssh/$key \
 
 # Configure test site
 mkdir /var/www/html/website/
-wget http://perso.esiee.fr/~boiss/AWS/website/index.php -P /var/www/html/website
+wget https://raw.githubusercontent.com/tibo-91/AWS_VPC_IDS/main/utils/index.php -P /var/www/html/website
 sed -i s/CUSTOM_IP/$db/g /var/www/html/website/index.php
 sudo systemctl restart apache2

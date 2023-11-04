@@ -23,7 +23,7 @@ ssh-add /home/ubuntu/.ssh/$key
 
 # Configure DB Server
 ssh -i /home/ubuntu/.ssh/$key \
-    -t ec2-user@$db "wget http://perso.esiee.fr/~boiss/AWS/install_dbserver.sh; \
+    -t ec2-user@$db "wget https://raw.githubusercontent.com/tibo-91/AWS_VPC_IDS/main/utils/install_dbserver.sh; \
     sudo chmod +x ./install_dbserver.sh; \
     sudo bash ./install_dbserver.sh"
 

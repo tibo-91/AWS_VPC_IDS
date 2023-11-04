@@ -257,7 +257,8 @@ while true; do
         scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
         echo "- Executing commands using SSH protocol..."
         ssh -i ~/.ssh/$keyname \
-            -t ubuntu@$web_ipv4 "wget $repository_path/utils/install_webserver.sh; \
+            -t ubuntu@$web_ipv4 "wget $repository_path/cfg/config.ini \
+                wget $repository_path/utils/install_webserver.sh; \
                 sudo chmod +x ./install_webserver.sh; \
                 sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4"
         break

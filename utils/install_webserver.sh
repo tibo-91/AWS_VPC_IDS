@@ -1,5 +1,15 @@
 #!/bin/bash
 
+config_file=cfg/config.ini
+
+# Read configuration file
+if [ -f $config_file ]; then
+    source $config_file
+else
+    echo "Error: Configuration file $config_file not found."
+    exit 1
+fi
+
 # Retrieves command parameters
 while getopts k:b: flag
 do
@@ -24,8 +34,8 @@ ssh-add /home/ubuntu/.ssh/$key
 # Configure DB Server
 ssh -i /home/ubuntu/.ssh/$key \
     -t ec2-user@$db "wget $repository_path/utils/install_dbserver.sh; \
-    sudo chmod +x ./install_dbserver.sh; \
-    sudo bash ./install_dbserver.sh"
+    	sudo chmod +x ./install_dbserver.sh; \
+    	sudo bash ./install_dbserver.sh"
 
 # Configure test site
 mkdir /var/www/html/website/

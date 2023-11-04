@@ -1,6 +1,6 @@
 #!/bin/bash
 
-config_file=cfg/config.ini
+config_file=config.ini
 
 # Read configuration file
 if [ -f $config_file ]; then

@@ -23,12 +23,12 @@ ssh-add /home/ubuntu/.ssh/$key
 
 # Configure DB Server
 ssh -i /home/ubuntu/.ssh/$key \
-    -t ec2-user@$db "wget https://raw.githubusercontent.com/tibo-91/AWS_VPC_IDS/main/utils/install_dbserver.sh; \
+    -t ec2-user@$db "wget $repository_path/utils/install_dbserver.sh; \
     sudo chmod +x ./install_dbserver.sh; \
     sudo bash ./install_dbserver.sh"
 
 # Configure test site
 mkdir /var/www/html/website/
-wget https://raw.githubusercontent.com/tibo-91/AWS_VPC_IDS/main/utils/index.php -P /var/www/html/website
+wget $repository_path/utils/index.php -P /var/www/html/website
 sed -i s/CUSTOM_IP/$db/g /var/www/html/website/index.php
 sudo systemctl restart apache2

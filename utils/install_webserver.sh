@@ -1,14 +1,5 @@
 #!/bin/bash
 
-config_file=config.ini
-
-# Read configuration file
-if [ -f $config_file ]; then
-    source $config_file
-else
-    echo "Error: Configuration file $config_file not found."
-    exit 1
-fi
 
 # Retrieves command parameters
 while getopts k:b: flag

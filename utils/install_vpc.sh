@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source $config_file
 
 #############################
 ## 1. VPC SERVICE MOUNTING ##

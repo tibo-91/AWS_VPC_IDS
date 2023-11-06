@@ -5,6 +5,7 @@ config_file=cfg/config.ini
 # Read configuration file
 if [ -f $config_file ]; then
     source $config_file
+    export $config_file
 else
     echo "Error: Configuration file $config_file not found."
     exit 1
@@ -34,8 +35,5 @@ else
 fi
 
 
-#######################
 
-sed -i "2s|^|config_file=${config_file}|" ./utils/install_vpc.sh;
-sed -i "3s|^|source ${config_file}|" ./utils/install_vpc.sh;
 ./utils/install_vpc.sh

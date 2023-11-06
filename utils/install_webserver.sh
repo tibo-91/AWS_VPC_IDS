@@ -43,10 +43,7 @@ sudo systemctl restart apache2
 # if trafic_mirroring=1, configure IDS
 if [ $trafic_mirroring -eq 1 ]; then
 	# Configure IDS
-	#ssh -i /home/ubuntu/.ssh/$key \
-	#    -t ec2-user@$ids "wget $repository_path/utils/THE_SCRIPT.sh; \
-	#    	sudo chmod +x ./configure_ids_on_webserver.sh; \
-	#    	sudo bash ./configure_ids_on_webserver.sh"
+	sleep 1
 
 else
 	# Install Snort

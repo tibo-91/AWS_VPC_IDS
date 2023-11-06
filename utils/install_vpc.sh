@@ -1,5 +1,14 @@
 #!/bin/bash
 
+##############################################################
+########################### WARNING ########################## 
+##                                                          ##
+## Keep lines 10-11 empty                                   ##
+## The main script will write some variables on these lines ##
+## If the lines are not empty, they will be overwritten     ##
+##############################################################
+
+
 
 #############################
 ## 1. VPC SERVICE MOUNTING ##
@@ -238,7 +247,6 @@ while true; do
 	fi
 	sleep 10
 done
-
 
 
 #######################

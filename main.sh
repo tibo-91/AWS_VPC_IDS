@@ -12,7 +12,7 @@ fi
 
 cat <<EOF
 =========================================================================================
-VPC & IDS Lab
+AI and Security Cloud Services: VPC & IDS project 
 
 Authors: Sebastien BOIS - Maxime BOUET - Thibault RENOU - Yanis TAHRAT
 Date: 30/10/2023
@@ -23,23 +23,37 @@ To retrieve these data, launch a sandbox session and start the lab.
 The data will be printed in the tab 'Details'.
 =========================================================================================
 
-
 EOF
 
 if [ $traffic_mirroring -ne 1 ]; then
-    echo -e "This script will install the IDS on the Web Server.\n"
+    echo -e "This script will install the IDS directly on the Web Server.\n"
 else
     echo -e "This script will install the IDS using Traffic Mirroring.\n"
 fi
 
 
-## 1. Install VPC
+####################
+## 1. INSTALL VPC ##
+####################
 
-(
-    sed -i "2s|^|config_file=\"$config_file\"|" ./utils/install_vpc.sh
-    sed -i '3s|^|source $config_file\n|' ./utils/install_vpc.sh
+# Import configuration file to the script
+sed -i "10s|.*|config_file=$config_file|" ./utils/install_vpc.sh
+sed -i "11s|.*|source $config_file|" ./utils/install_vpc.sh
 
-    ./utils/install_vpc.sh
-)
-sed -i "2d" ./utils/install_vpc.sh
-sed -i "3d" ./utils/install_vpc.sh
+# Run the script
+bash ./utils/install_vpc.sh
+
+# Remove configuration file from the script
+sed -i '10s|.*||' ./utils/install_vpc.sh
+sed -i '11s|.*||' ./utils/install_vpc.sh
+
+
+
+##################################
+## 2. INSTALL TRAFFIC MIRRORING ##
+##################################
+
+# Run the script
+if [ $traffic_mirroring -eq 1]; then
+    bash ./utils/install_ids_traffic_mirroring.sh
+fi

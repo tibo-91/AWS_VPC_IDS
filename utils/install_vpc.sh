@@ -1,33 +1,5 @@
 #!/bin/bash
 
-config_file=cfg/config.ini
-
-# Read configuration file
-if [ -f $config_file ]; then
-    source $config_file
-else
-    echo "Error: Configuration file $config_file not found."
-    exit 1
-fi
-
-cat <<EOF
-=========================================================================================
-VPC & IDS Lab 
-Part 1: VPC service mounting automatization
-
-Authors: Sebastien BOIS - Maxime BOUET - Thibault RENOU - Yanis TAHRAT
-Date: 30/10/2023
-
-This script is used to mount automatically the architecture of the project.
-It requires the AWS Access Key ID, AWS Secret Access Key, and the region of the service.
-To retrieve these data, launch a sandbox session and start the lab.
-The data will be printed in the tab 'Details'.
-=========================================================================================
-
-
-EOF
-
-
 
 #############################
 ## 1. VPC SERVICE MOUNTING ##

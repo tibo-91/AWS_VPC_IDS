@@ -30,18 +30,13 @@ ssh -i /home/ubuntu/.ssh/$key \
     	sudo bash ./install_dbserver.sh"
 
 # Configure test site
-#mkdir /var/www/html/website/
-#wget $repository_path/utils/index.php -P /var/www/html/website
-#sed -i s/CUSTOM_IP/$db/g /var/www/html/website/index.php
-#sudo systemctl restart apache2
-
-# Configure test site
 mkdir /var/www/html/website/
 cd /var/www/html/
 sudo git clone http://github.com/Rinkish/Sqli_Edited_Version
-sed -i s/localhost/$db/g /var/www/html/Sqli_Edited_Version/sqlilabs/sql-connections/db-creds.inc
-sed -i s/root/aws/g /var/www/html/Sqli_Edited_Version/sqlilabs/sql-connections/db-creds.inc
-sed -i s/\$dbpass\ \=\'\'/\$dbpass\ \=\'pass\'/g /var/www/html/Sqli_Edited_Version/sqlilabs/sql-connections/db-creds.inc
+sudo mv Sqli_Edited_Version/sqliabs ..sqli/
+sed -i s/localhost/$db/g /var/www/html/sqli/sql-connections/db-creds.inc # change localhost to db server ip
+sed -i s/root/aws/g /var/www/html/sqli/sql-connections/db-creds.inc # change root to aws
+sed -i s/\$dbpass\ \=\'\'/\$dbpass\ \=\'pass\'/g /var/www/html/sqli/sql-connections/db-creds.inc # change '' to pass
 sudo systemctl restart apache2
 
 

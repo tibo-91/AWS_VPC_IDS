@@ -27,7 +27,7 @@ The data will be printed in the tab 'Details'.
 
 EOF
 
-if [ traffic_mirroring -ne 1 ]; then
+if [ $traffic_mirroring -ne 1 ]; then
     echo -e "This script will install the IDS on the Web Server.\n"
 else
     echo -e "This script will install the IDS using Traffic Mirroring.\n"

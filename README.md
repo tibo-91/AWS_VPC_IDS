@@ -111,3 +111,10 @@ After packages are installed and servers are upgraded, you may be prompted sever
 ![Restart of servers' services](images/service_restart.png)
 
 To handle these prompts efficiently, confirm every operations by pressing `Enter`.
+
+### Configuring Snort
+
+Once that the Snort IDS is installed, the script may ask you to set an adress range for the local network.
+![Snort configuration](images/snort_config.png)
+
+You will have to set the adress range to the value of the public subnet CIDR (by default 10.0.1.0/24 in the cfg/config.ini file) 

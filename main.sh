@@ -36,6 +36,6 @@ fi
 
 #######################
 
-sed -i "2s|^|config_file=${config_file}|" ./install_vpc.sh;
-sed -i "3s|^|source ${config_file}|" ./install_vpc.sh;
+sed -i "2s|^|config_file=${config_file}|" ./utils/install_vpc.sh;
+sed -i "3s|^|source ${config_file}|" ./utils/install_vpc.sh;
 ./utils/install_vpc.sh

@@ -282,3 +282,20 @@ private_route_id='$private_route_id'
 web_secgrp_id='$web_secgrp_id'
 db_secgrp_id='$db_secgrp_id'
 EOF
+
+
+######################
+## 4. END OF SCRIPT ##
+######################
+
+cat <<EOF
+
+
+=========================================================================================
+
+The servers and IDS has been configured. 
+You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
+
+=========================================================================================
+
+EOF

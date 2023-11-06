@@ -108,9 +108,6 @@ To do so, simply type "yes" (without quotes) and press `Enter` to continue.
 ### Restarting Services
 
 After packages are installed and servers are upgraded, you may be prompted several times to restart certain services. 
-![Restart of servers' services](images/services_restart.png)
+![Restart of servers' services](images/service_restart.png)
 
-To handle these prompts efficiently, follow these steps:
-1. Use the arrow keys to navigate to the SSH service.
-2. Press the `Spacebar` to uncheck the service.
-3. Confirm the operation by pressing `Enter`.
+To handle these prompts efficiently, confirm every operations by pressing `Enter`.

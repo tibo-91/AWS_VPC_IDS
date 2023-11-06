@@ -259,6 +259,7 @@ while true; do
         ssh -i ~/.ssh/$keyname \
             -t ubuntu@$web_ipv4 "wget $repository_path/utils/install_webserver.sh; \
 	            sed -i '2s|^|repository_path=${repository_path}|' ./install_webserver.sh; \
+                sed -i '3s|^|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh; \
                 sudo chmod +x ./install_webserver.sh; \
                 sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4"
         break

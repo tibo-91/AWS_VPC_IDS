@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+
+echo -e "\n\n----------------------------\n $repository_path/utils/install_dbserver.sh \n----------------------------\n\n"
+
 # Retrieves command parameters
 while getopts k:b: flag
 do

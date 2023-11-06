@@ -25,10 +25,10 @@ The data will be printed in the tab 'Details'.
 
 EOF
 
-if [ $traffic_mirroring -ne 1 ]; then
-    echo -e "This script will install the IDS directly on the Web Server.\n"
-else
+if [ $traffic_mirroring -eq 1 ]; then
     echo -e "This script will install the IDS using Traffic Mirroring.\n"
+else
+    echo -e "This script will install the IDS directly on the Web Server.\n"
 fi
 
 
@@ -54,6 +54,23 @@ sed -i '11s|.*||' ./utils/install_vpc.sh
 ##################################
 
 # Run the script
-if [ $traffic_mirroring -eq 1]; then
-    bash ./utils/install_ids_traffic_mirroring.sh
+if [ $traffic_mirroring -eq 1 ]; then
+    bash ./utils/install_ids.sh
 fi
+
+
+######################
+## 3. END OF SCRIPT ##
+######################
+
+cat <<EOF
+
+
+=========================================================================================
+
+The servers and IDS has been configured. 
+You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
+
+=========================================================================================
+
+EOF

@@ -39,14 +39,9 @@ sed -i s/\$dbpass\ \=\'\'/\$dbpass\ \=\'pass\'/g /var/www/html/sqli/sql-connecti
 sudo systemctl restart apache2
 
 
-# Installing IDS on Web Server
+# Installing IDS on Web Server (log SQL injection alerts on port 80)
 if [ $traffic_mirroring -ne 1 ]; then
-	#wget $repository_path/utils/install_ids_webserver.sh
-	#sudo bash ./install_ids_webserver.sh
-	# Install Snort
 	sudo apt install snort -y
-	
-	# Configure Snort to log SQL injection alerts on port 80
 	echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"select"; sid:1000001;)' | sudo tee -a /etc/snort/rules/local.rules
 	echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"SELECT"; sid:1000002;)' | sudo tee -a /etc/snort/rules/local.rules
 	echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"%27"; sid:1000003;)' | sudo tee -a /etc/snort/rules/local.rules # %27 is '

@@ -239,8 +239,8 @@ while true; do
         echo "- Executing commands using SSH protocol..."
         ssh -i ~/.ssh/$keyname \
             -t ubuntu@$web_ipv4 "wget $repository_path/utils/install_webserver.sh; \
-	            sed -i '2s|^|repository_path=${repository_path}|' ./install_webserver.sh; \
-                sed -i '3s|^|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh; \
+	            sed -i '2s|.*|repository_path=${repository_path}|' ./install_webserver.sh; \
+                sed -i '3s|.*|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh; \
                 sudo chmod +x ./install_webserver.sh; \
                 sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4"
         break
@@ -281,21 +281,4 @@ private_route_id='$private_route_id'
 
 web_secgrp_id='$web_secgrp_id'
 db_secgrp_id='$db_secgrp_id'
-EOF
-
-
-######################
-## 4. END OF SCRIPT ##
-######################
-
-cat <<EOF
-
-
-=========================================================================================
-
-The servers has been configured. 
-You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
-
-=========================================================================================
-
 EOF

@@ -68,24 +68,51 @@ while true; do
 			--query "Reservations[0].Instances[0].PrivateIpAddress" | grep -Eo "[0-9.]+"`
 
 		echo "- IDS Server IP is: $ids_ipv4"
-			
-		# Send your SSH public key to the web server (jump host)
-		echo "- Sending SSH public key to the Web Server $web_ipv4"
-		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
 
-		# Execute commands using SSH protocol through the jump host
-		echo "- Executing commands using SSH protocol through jump host..."
-		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
-				"ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
-		    		'wget $repository_path/utils/configure_ids.sh; \
-		    		sudo chmod +x ./configure_ids.sh; \
-		    		sudo bash ./configure_ids.sh'"
+		#######################
+        ## Traffic mirroring ##
+		#######################
 
+        echo -e "\nCreating Traffic mirroring..."
+
+        network_interface_id=`aws ec2 describe-instances \
+            --instance-ids $ids_server_id \
+            --output text \
+            --query "Reservations[0].Instances[0].NetworkInterfaces[0].NetworkInterfaceId"`
+        echo "- The network interface ID targeted by the trafic mirroring is $network_interface_id"
+
+        mirror_target_id=`aws ec2 create-traffic-mirror-target`
+        echo "- The traffic mirror target $mirror_target_id has been created"
+
+        mirror_filter_id=`aws ec2 create-traffic-mirror-filter`
+        echo "- The traffic mirror filter $mirror_filter_id has been created"
+
+        traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
+            --network-interface-id $network_interface_id \
+            --traffic-mirror-target-id mirror_target_id \
+            --traffic-mirror-filter-id mirror_filter_id \
+            --session-number 1`
+        echo "- The traffic mirror session $traffic_mirror_session_id has been created"
+        
+		######################
+		## Installing Snort ##
+		######################
+
+		echo -e "\n Installing Snort on IDS..."
+		echo "- Sending SSH public key to the IDS Server $ids_server_id"
+		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$ids_ipv4:~/.ssh/
+		echo "- Executing commands using SSH protocol..."
+		ssh -i ~/.ssh/$keyname \
+		    -t ubuntu@$ids_ipv4 \
+            "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t \
+                'wget $repository_path/utils/configure_ids.sh'; \
+                sed -i '2s|.*|network_interface_id=${network_interface_id}|' ./configure_ids.sh; \
+                sudo chmod +x ./configure_ids.sh; \
+                sudo bash ./configure_ids.sh"
 		break
 	fi
     sleep 10
 done
-
 
 cat <<EOF
 

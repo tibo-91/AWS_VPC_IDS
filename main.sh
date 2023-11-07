@@ -38,7 +38,7 @@ fi
 
 # Run the script with variables
 echo "Mounting VPC server..."
-./utils/install_vpc.sh -c $config_file
+`$install_vpc_script -c $config_file`
 
 
 ##################################
@@ -56,5 +56,5 @@ fi
 # Run the script with variables
 if [ $traffic_mirroring -eq 1 ]; then
     echo "Mounting IDS Server..."
-    ./utils/install_ids.sh -c $config_file -v $vpc_variables_file
+    `$install_ids_script -c $config_file -v $vpc_variables_file`
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Retrieves command parameters
-while getopts k:b: flag
+while getopts k: flag
 do
 	case "${flag}" in
 		k) network_interface_ids_id=${OPTARG};;

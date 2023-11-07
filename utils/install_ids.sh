@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Retrieves command parameters
-while getopts k:b: flag
+while getopts c:v: flag
 do
 	case "${flag}" in
 		c) config_file=${OPTARG};;

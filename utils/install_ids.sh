@@ -105,7 +105,7 @@ while true; do
             --traffic-mirror-target-id $mirror_target_id \
             --traffic-mirror-filter-id $mirror_filter_id \
             --session-number 1`
-        echo "- The traffic mirror session $traffic_mirror_session_id has been created"
+        echo -e "- The traffic mirror session has been created:\n$traffic_mirror_session_id"
         
 		######################
 		## Installing Snort ##

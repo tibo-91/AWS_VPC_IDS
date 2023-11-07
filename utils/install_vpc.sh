@@ -156,13 +156,6 @@ echo "- Web Server Security Group $web_secgrp_id: Authorizing incoming TCP reque
 aws ec2 authorize-security-group-ingress \
     --group-id $db_secgrp_id \
     --protocol tcp \
-    --port $db_port \
-    --cidr $db_in_rule_cidr > /dev/null
-echo "- DB Server Security Group $db_secgrp_id: Authorizing incoming TCP request on port $db_port for $db_in_rule_cidr"
-
-aws ec2 authorize-security-group-ingress \
-    --group-id $db_secgrp_id \
-    --protocol tcp \
     --port $ssh_port \
     --cidr $ssh_db_in_rule_cidr > /dev/null
 echo "- DB Server Security Group $db_secgrp_id: Authorizing incoming TCP request on port $ssh_port for $ssh_db_in_rule_cidr"

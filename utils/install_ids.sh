@@ -92,7 +92,6 @@ while true; do
 			--query "TrafficMirrorFilter.TrafficMirrorFilterId"`
         echo "- The traffic mirror filter $mirror_filter_id has been created"
 
-		sleep 10
         traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
             --network-interface-id $network_interface_id \
             --traffic-mirror-target-id $mirror_target_id \

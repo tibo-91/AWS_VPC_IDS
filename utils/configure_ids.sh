@@ -1,6 +1,14 @@
 #!/bin/bash
 
-echo -e "\n\n\n$network_interface_id\n\n\n"
+
+# Retrieves command parameters
+while getopts k:b: flag
+do
+	case "${flag}" in
+		k) network_interface_ids_id=${OPTARG};;
+	esac
+done
+echo -e "\n\n\n$network_interface_ids_id\n\n\n"
 
 sudo apt update -y
 sudo apt upgrade -y

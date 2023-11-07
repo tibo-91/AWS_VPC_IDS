@@ -71,7 +71,7 @@ while true; do
 			--query "Reservations[0].Instances[0].PrivateIpAddress" | grep -Eo "[0-9.]+"`
 			
 		ssh -i ~/.ssh/$keyname \
-		    -t ubuntu@$web_ipv4 \
+		    -t ubuntu@$ids_ipv4 \
             "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t 'wget $repository_path/utils/configure_ids.sh'; \
             sudo chmod +x ./configure_ids.sh; \
             sudo bash ./configure_ids.sh"

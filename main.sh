@@ -42,13 +42,13 @@ read -r -d '' replacements <<EOF
 11s|.*|source $config_file|
 EOF
 
-sed -i "$replacements" ./utils/install_vpc.sh
+sed -i "$replacements" "$install_vpc_script"
 
 # Run the script
-./utils/install_vpc.sh
+"$install_vpc_script"
 
 # Remove configuration file from the script
-sed -i '10s|.*||; 11s|.*||' ./utils/install_vpc.sh
+sed -i '10s|.*||; 11s|.*||' "$install_vpc_script"
 
 
 
@@ -72,13 +72,13 @@ if [ $traffic_mirroring -eq 1 ]; then
     13s|.*|source $vpc_variables_file|
 EOF
 
-    sed -i "$replacements" ./utils/install_ids.sh
+    sed -i "$replacements" "$install_ids_script"
 
     # Run the script
-    ./utils/install_ids.sh
+    "$install_ids_script"
 
     # Remove configuration file from the script
-    sed -i '10s|.*||; 11s|.*||; 12s|.*||; 13s|.*||' ./utils/install_ids.sh
+    sed -i '10s|.*||; 11s|.*||; 12s|.*||; 13s|.*||' "$install_ids_script"
 fi
 
 

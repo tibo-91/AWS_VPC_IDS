@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Retrieves command parameters
-while getopts k:b: flag
+while getopts k:b:r:t: flag
 do
 	case "${flag}" in
 		k) key=${OPTARG};;

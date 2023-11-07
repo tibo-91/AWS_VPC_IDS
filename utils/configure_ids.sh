@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Retrieves command parameters
-while getopts k: flag
+while getopts n: flag
 do
 	case "${flag}" in
-		k) network_interface_ids_id=${OPTARG};;
+		n) network_interface_ids_id=${OPTARG};;
 	esac
 done
 

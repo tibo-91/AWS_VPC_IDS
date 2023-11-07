@@ -76,11 +76,11 @@ while true; do
 		# Execute commands using SSH protocol through the jump host
 		echo "- Executing commands using SSH protocol through jump host..."
 		ssh -i ~/.ssh/$keyname \
-			-J ubuntu@$web_ipv4 ubuntu@$ids_ipv4 <<EOF
-		    	wget $repository_path/utils/configure_ids.sh
-		    	sudo chmod +x ./configure_ids.sh
-		    	sudo bash ./configure_ids.sh
-EOF
+			-J ubuntu@$web_ipv4 \
+			-t ubuntu@$ids_ipv4 \
+				"wget $repository_path/utils/configure_ids.sh; \
+		    	sudo chmod +x ./configure_ids.sh; \
+		    	sudo bash ./configure_ids.sh"
 		break
 	fi
     sleep 10

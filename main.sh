@@ -85,16 +85,3 @@ EOF
     # Remove configuration file from the script
     sed -i '10s|.*||; 11s|.*||; 12s|.*||; 13s|.*||' "$install_ids_script"
 fi
-
-
-cat <<EOF
-
-
-=========================================================================================
-
-The servers has been configured. 
-You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
-
-=========================================================================================
-
-EOF

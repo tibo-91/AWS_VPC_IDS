@@ -112,9 +112,14 @@ After packages are installed and servers are upgraded, you may be prompted sever
 
 To handle these prompts efficiently, confirm every operations by pressing `Enter`.
 
-### Configuring Snort
+### Configuring IDS (Snort)
 
-Once that the Snort IDS is installed, the script may ask you to set an adress range for the local network.
+#### IDS directly installed on Web Server
+Once that the IDS is installed, the script may ask you to set an adress range for the local network.
 ![Snort configuration](images/snort_config.png)
 
-You will have to set the adress range to the value of the public subnet CIDR (by default `10.0.1.0/24` in the cfg/config.ini file) 
+You will have to set the adress range to the value of the public subnet CIDR (by default `10.0.1.0/24` in the `cfg/config.ini` file) 
+
+#### IDS Traffic Mirroring
+
+Nothing for the moment...

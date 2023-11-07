@@ -73,11 +73,11 @@ Follow these steps to get started with the project:
    ./main.sh
    ```
    The `main.sh` script will internally call the following scripts in order:
-      - `utils/install_vpc.sh`
-      - `utils/install_webserver.sh`
-      - `utils/install_dbserver.sh`
-      - `utils/install_ids.sh`
-      - `utils/configure_ids.sh`   
+   - `utils/install_vpc.sh`
+   - `utils/install_webserver.sh`
+   - `utils/install_dbserver.sh`
+   - `utils/install_ids.sh`
+   - `utils/configure_ids.sh`   
 
 #### 4. Go on the website and test the IDS by performing SQL injections.
 
@@ -88,7 +88,7 @@ Follow these steps to get started with the project:
    Then you can perform SQL injections on the differents labs, and verify that the IDS is working well by looking at the `/var/log/snort/snort.alert.fast` log file:
    ![Snort logs on Web Server](images/snort_log_webserver.png)
 
-## Configuration
+## Configurationgi
 
 You can customize the deployment by editing the `cfg/config.ini` file. 
 This file stores environment-specific configuration variables that can be adjusted to fit your needs.

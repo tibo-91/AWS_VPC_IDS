@@ -67,19 +67,26 @@ Follow these steps to get started with the project:
    You will be able to paste the new AWS CLI credentials:
    ![Configure AWS CLI credentials](images/setup_sh.png)
 
-3. Execute the `main.sh` script to start the VPC deployment and IDS installation:
+3. Execute the `main.sh` script to start the VPC deployment and IDS installation.
 
    ```
    ./main.sh
    ```
+   The `main.sh` script will internally call the following scripts in order:
+      - `utils/install_vpc.sh`
+      - `utils/install_webserver.sh`
+      - `utils/install_dbserver.sh`
+      - `utils/install_ids.sh`
+      - `utils/configure_ids.sh`   
 
-4. The `main.sh` script will internally call the following scripts in order:
-   - `utils/install_vpc.sh`
-   - `utils/install_webserver.sh`
-   - `utils/install_dbserver.sh`
-   - `utils/install_ids.sh`
-   - `utils/configure_ids.sh`   
+4. Go on the website and test the IDS by performing SQL injections.
 
+You will first need to setup the database on the Web Server:
+![Setting up the database](images/setup_db.png)
+![Setting up the database](images/setup_db2.png)
+
+Then you can perform SQL injections on the differents labs, and verify that the IDS is working well by looking at the `/var/log/snort/snort.alert.fast` log file:
+![Snort logs on Web Server](images/snort_log_webserver.png)
 
 ## Configuration
 

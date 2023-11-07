@@ -1,5 +1,5 @@
 #!/bin/bash
-network_interface_id=eni-0a0a0a0a0a0a0a0a0
+network_interface_id=eni-0a0a0a0a0a0a0a0a0 # random ID for testing purpose
 echo "Configuring Traffic Mirroring..."
 
 sudo apt update -y

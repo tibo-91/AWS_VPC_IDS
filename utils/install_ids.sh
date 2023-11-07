@@ -11,9 +11,9 @@
 
 
 
-#############################
-## 1. IDS SERVICE MOUNTING ##
-#############################
+##########################
+## IDS SERVICE MOUNTING ##
+##########################
 
 # Security Group
 ids_secgrp_id=`aws ec2 create-security-group \

@@ -27,13 +27,26 @@ ids_secgrp_id=`aws ec2 create-security-group \
 	--query "GroupId"`
 echo "- IDS Server security group $ids_secgrp_id has been created"
 
-# Inbound rule
+# Inbound rule (accept everything)
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
-	--protocol tcp \
-	--port $ssh_port \
-	--cidr $ids_in_rule_cidr > /dev/null
-echo "- $ids_secgrp_id: Authorizing incoming TCP request on port $ssh_port for $ids_in_rule_cidr"
+	--protocol all \
+	--cidr $vpc_id > /dev/null
+
+#aws ec2 authorize-security-group-ingress \
+#	--group-id $ids_secgrp_id \
+#	--protocol tcp \
+#	--port $ssh_port \
+#	--cidr $ids_in_rule_cidr > /dev/null
+#echo "- $ids_secgrp_id: Authorizing incoming TCP request on port $ssh_port for $ids_in_rule_cidr"
+#
+#aws ec2 authorize-security-group-ingress \
+#	--group-id $ids_secgrp_id \
+#	--protocol udp \
+#	--port $snort_port \
+#	--cidr $ids_in_rule_cidr > /dev/null
+#echo "- $ids_secgrp_id: Authorizing incoming UDP request on port $snort_port for $ids_in_rule_cidr"
+
 
 # Launch IDS Server
 ids_server_id=`aws ec2 run-instances \

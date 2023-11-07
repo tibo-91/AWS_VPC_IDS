@@ -1,14 +1,11 @@
 #!/bin/bash
-network_interface_id=eni-0a0a0a0a0a0a0a0a0 # random ID for testing purpose
-echo "Configuring Traffic Mirroring..."
 
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install snort -y
 
 # specify the interface to listen on
-sudo sed -i "s|^#config interface:.*|config interface:$network_interface_id|" /etc/snort/snort.conf
-#snort -A console -i $network_interface_id -u snort -c /etc/snort/snort.conf
+# <here>
 
 echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"select"; sid:1000001;)' | sudo tee -a /etc/snort/rules/local.rules
 echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"SELECT"; sid:1000002;)' | sudo tee -a /etc/snort/rules/local.rules

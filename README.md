@@ -53,11 +53,11 @@ PROJECT/
 
 Follow these steps to get started with the project:
 
-1. Start an AWS Sandbox Lab instance and make sure you have the AWS CLI credentials for that instance.
+#### 1. Start an AWS Sandbox Lab instance and make sure you have the AWS CLI credentials for that instance.
 
    ![AWS CLI credentials](images/AWS_CLI_credentials.png)
 
-2. Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will remove existing SSH keys and credentials, and set up new ones. 
+#### 2. Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will remove existing SSH keys and credentials, and set up new ones. 
 
    ```
    chmod +x setup.sh
@@ -67,7 +67,7 @@ Follow these steps to get started with the project:
    You will be able to paste the new AWS CLI credentials:
    ![Configure AWS CLI credentials](images/setup_sh.png)
 
-3. Execute the `main.sh` script to start the VPC deployment and IDS installation.
+#### 3. Execute the `main.sh` script to start the VPC deployment and IDS installation.
 
    ```
    ./main.sh
@@ -79,14 +79,14 @@ Follow these steps to get started with the project:
       - `utils/install_ids.sh`
       - `utils/configure_ids.sh`   
 
-4. Go on the website and test the IDS by performing SQL injections.
+#### 4. Go on the website and test the IDS by performing SQL injections.
 
-You will first need to setup the database on the Web Server:
-![Setting up the database](images/setup_db.png)
-![Setting up the database](images/setup_db2.png)
+   You will first need to setup the database on the Web Server:
+   ![Setting up the database](images/setup_db.png)
+   ![Setting up the database](images/setup_db2.png)
 
-Then you can perform SQL injections on the differents labs, and verify that the IDS is working well by looking at the `/var/log/snort/snort.alert.fast` log file:
-![Snort logs on Web Server](images/snort_log_webserver.png)
+   Then you can perform SQL injections on the differents labs, and verify that the IDS is working well by looking at the `/var/log/snort/snort.alert.fast` log file:
+   ![Snort logs on Web Server](images/snort_log_webserver.png)
 
 ## Configuration
 

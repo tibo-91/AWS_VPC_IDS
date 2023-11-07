@@ -119,7 +119,7 @@ while true; do
             "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
                 'wget $repository_path/utils/configure_ids.sh; \
                 sudo chmod +x ./configure_ids.sh; \
-                sudo bash ./configure_ids.sh -k $network_interface_ids_id'"
+                sudo bash ./configure_ids.sh -n $network_interface_ids_id'"
 		break
 	fi
     sleep 10

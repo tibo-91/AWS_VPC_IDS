@@ -72,6 +72,8 @@ if [ $traffic_mirroring -eq 1 ]; then
     13s|.*|source $vpc_variables_file|
 EOF
 
+    sed -i "$replacements" ./utils/install_ids.sh
+
     # Run the script
     ./utils/install_ids.sh
 

@@ -88,7 +88,7 @@ Follow these steps to get started with the project:
    Then you can perform SQL injections on the differents labs, and verify that the IDS is working well by looking at the `/var/log/snort/snort.alert.fast` log file:
    ![Snort logs on Web Server](images/snort_log_webserver.png)
 
-## Configurationgi
+## Configuration
 
 You can customize the deployment by editing the `cfg/config.ini` file. 
 This file stores environment-specific configuration variables that can be adjusted to fit your needs.

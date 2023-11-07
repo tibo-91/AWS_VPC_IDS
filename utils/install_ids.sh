@@ -75,14 +75,21 @@ while true; do
 
         echo -e "\nCreating Traffic mirroring..."
 
-        network_interface_id=`aws ec2 describe-instances \
+		# Network interfaces
+        network_interface_ids_id=`aws ec2 describe-instances \
             --instance-ids $ids_server_id \
             --output text \
             --query "Reservations[0].Instances[0].NetworkInterfaces[0].NetworkInterfaceId"`
-        echo "- The network interface ID targeted by the trafic mirroring is $network_interface_id"
+        echo "- The network interface ID targeted by the trafic mirroring is $network_interface_ids_id"
 
+		network_interface_web_id=`aws ec2 describe-instances \
+			--instance-ids $web_server_id \
+			--output text \
+			--query "Reservations[0].Instances[0].NetworkInterfaces[0].NetworkInterfaceId"`
+
+		# Mirrors
         mirror_target_id=`aws ec2 create-traffic-mirror-target \
-			--network-interface-id $network_interface_id \
+			--network-interface-id $network_interface_ids_id \
 			--output text \
 			--query "TrafficMirrorTarget.TrafficMirrorTargetId"`
         echo "- The traffic mirror target $mirror_target_id has been created"
@@ -92,8 +99,9 @@ while true; do
 			--query "TrafficMirrorFilter.TrafficMirrorFilterId"`
         echo "- The traffic mirror filter $mirror_filter_id has been created"
 
+		# Traffic mirror session
         traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
-            --network-interface-id $network_interface_id \
+            --network-interface-id $network_interface_web_id \
             --traffic-mirror-target-id $mirror_target_id \
             --traffic-mirror-filter-id $mirror_filter_id \
             --session-number 1`

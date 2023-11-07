@@ -26,9 +26,9 @@ The data will be printed in the tab 'Details'.
 EOF
 
 if [ $traffic_mirroring -eq 1 ]; then
-    echo -e "This script will install the IDS using Traffic Mirroring.\n"
+    echo -e "The IDS will be installed using Traffic Mirroring.\n"
 else
-    echo -e "This script will install the IDS directly on the Web Server.\n"
+    echo -e "The IDS will be installed directly on the Web Server.\n"
 fi
 
 
@@ -36,16 +36,19 @@ fi
 ## 1. INSTALL VPC ##
 ####################
 
-# Import configuration file to the script
-sed -i "10s|.*|config_file=$config_file|" ./utils/install_vpc.sh
-sed -i "11s|.*|source $config_file|" ./utils/install_vpc.sh
+# Import configuration file into the script
+read -r -d '' replacements <<EOF
+10s|.*|config_file=$config_file|
+11s|.*|source $config_file|
+EOF
+
+sed -i "$replacements" ./utils/install_vpc.sh
 
 # Run the script
-bash ./utils/install_vpc.sh
+./utils/install_vpc.sh
 
 # Remove configuration file from the script
-sed -i '10s|.*||' ./utils/install_vpc.sh
-sed -i '11s|.*||' ./utils/install_vpc.sh
+sed -i '10s|.*||; 11s|.*||' ./utils/install_vpc.sh
 
 
 
@@ -53,7 +56,28 @@ sed -i '11s|.*||' ./utils/install_vpc.sh
 ## 2. INSTALL TRAFFIC MIRRORING ##
 ##################################
 
-# Run the script
 if [ $traffic_mirroring -eq 1 ]; then
-    bash ./utils/install_ids.sh
+
+    # Verify that the variables from the VPC script are available
+    if [ ! -f "$vpc_variables_file" ]; then 
+        echo "Error: Configuration file $vpc_variables_file not found."
+        exit 1
+    fi
+
+    # Import configuration file and variables into the script
+    read -r -d '' replacements <<EOF
+    10s|.*|config_file=$config_file|
+    11s|.*|source $config_file|
+    12s|.*|vpc_variables_file=$vpc_variables_file|
+    13s|.*|source $vpc_variables_file|
+EOF
+
+    # Run the script
+    ./utils/install_ids.sh
+
+    # Remove configuration file from the script
+    sed -i '10s|.*||; 11s|.*||; 12s|.*||; 13s|.*||' ./utils/install_ids.sh
 fi
+
+
+echo -e "\n\nDone"

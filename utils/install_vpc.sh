@@ -235,11 +235,13 @@ while true; do
         scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
         echo "- Executing commands using SSH protocol..."
         ssh -i ~/.ssh/$keyname \
-            -t ubuntu@$web_ipv4 "wget $repository_path/utils/install_webserver.sh; \
-	            sed -i '2s|.*|repository_path=${repository_path}|' ./install_webserver.sh; \
-                sed -i '3s|.*|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh; \
-                sudo chmod +x ./install_webserver.sh; \
-                sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4"
+            -t ubuntu@$web_ipv4 <<EOF
+                wget $repository_path/utils/install_webserver.sh
+                sed -i '2s|.*|repository_path=${repository_path}|' ./install_webserver.sh
+                sed -i '3s|.*|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh
+                sudo chmod +x ./install_webserver.sh
+                sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4
+EOF
         break
 	fi
 	sleep 10
@@ -258,16 +260,9 @@ fi
 
 cat <<EOF > $vpc_variables_file
 vpc_id='$vpc_id'
-keyname='$keyname'
 
 public_id='$public_id'
 private_id='$private_id'
-
-web_server_id='$web_server_id'
-db_server_id='$db_server_id'
-
-web_ipv4='$web_ipv4'
-db_ipv4='$db_ipv4'
 
 ig_id='$ig_id'
 nat_id='$nat_id'
@@ -278,21 +273,10 @@ private_route_id='$private_route_id'
 
 web_secgrp_id='$web_secgrp_id'
 db_secgrp_id='$db_secgrp_id'
-EOF
 
+web_server_id='$web_server_id'
+db_server_id='$db_server_id'
 
-######################
-## 4. END OF SCRIPT ##
-######################
-
-cat <<EOF
-
-
-=========================================================================================
-
-The servers has been configured. 
-You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
-
-=========================================================================================
-
+web_ipv4='$web_ipv4'
+db_ipv4='$db_ipv4'
 EOF

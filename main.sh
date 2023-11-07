@@ -57,13 +57,16 @@ sed -i '10s|.*||; 11s|.*||' "$install_vpc_script"
 ## 2. INSTALL TRAFFIC MIRRORING ##
 ##################################
 
-if [ $traffic_mirroring -eq 1 ]; then
+# Read variables from the VPC script
+if [ -f $vpc_variables_file ]; then
+    source $vpc_variables_file
+else
+    echo "Error: Configuration file $vpc_variables_file not found."
+    exit 1
+fi
 
-    # Verify that the variables from the VPC script are available
-    if [ ! -f "$vpc_variables_file" ]; then 
-        echo "Error: Configuration file $vpc_variables_file not found."
-        exit 1
-    fi
+
+if [ $traffic_mirroring -eq 1 ]; then
 
     # Import configuration file and variables into the script
     read -r -d '' replacements <<EOF
@@ -84,4 +87,14 @@ EOF
 fi
 
 
-echo -e "\n\nDone"
+cat <<EOF
+
+
+=========================================================================================
+
+The servers has been configured. 
+You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
+
+=========================================================================================
+
+EOF

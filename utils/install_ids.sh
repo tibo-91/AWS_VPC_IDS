@@ -69,14 +69,18 @@ while true; do
 
 		echo "- IDS Server IP is: $ids_ipv4"
 			
-		echo "- Sending SSH public key to the IDS Server $ids_server_id"
-		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$ids_ipv4:~/.ssh/
-		echo "- Executing commands using SSH protocol..."
+		# Send your SSH public key to the web server (jump host)
+		echo "- Sending SSH public key to the Web Server $web_ipv4"
+		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
+
+		# Execute commands using SSH protocol through the jump host
+		echo "- Executing commands using SSH protocol through jump host..."
 		ssh -i ~/.ssh/$keyname \
-		    -t ubuntu@$ids_ipv4 \
-            "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t 'wget $repository_path/utils/configure_ids.sh'; \
-            sudo chmod +x ./configure_ids.sh; \
-            sudo bash ./configure_ids.sh"
+			-J ubuntu@$web_ipv4 ubuntu@$ids_ipv4 <<EOF
+		    	wget $repository_path/utils/configure_ids.sh
+		    	sudo chmod +x ./configure_ids.sh
+		    	sudo bash ./configure_ids.sh
+EOF
 		break
 	fi
     sleep 10
@@ -89,6 +93,10 @@ cat <<EOF
 =========================================================================================
 
 The IDS has been configured. 
+You can make a SSH connection to the IDS Server using the following commands:
+
+ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
+ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4
 
 =========================================================================================
 

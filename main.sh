@@ -36,21 +36,9 @@ fi
 ## 1. INSTALL VPC ##
 ####################
 
-# Import configuration file into the script
-read -r -d '' replacements <<EOF
-10s|.*|config_file=$config_file|
-11s|.*|source $config_file|
-EOF
-
-sed -i "$replacements" "$install_vpc_script"
-
-# Run the script
+# Run the script with variables
 echo "Mounting VPC server..."
-"$install_vpc_script"
-
-# Remove configuration file from the script
-sed -i '10s|.*||; 11s|.*||' "$install_vpc_script"
-
+"$install_vpc_script" -c $config_file
 
 
 ##################################
@@ -65,23 +53,8 @@ else
     exit 1
 fi
 
-
+# Run the script with variables
 if [ $traffic_mirroring -eq 1 ]; then
-
-    # Import configuration file and variables into the script
-    read -r -d '' replacements <<EOF
-    10s|.*|config_file=$config_file|
-    11s|.*|source $config_file|
-    12s|.*|vpc_variables_file=$vpc_variables_file|
-    13s|.*|source $vpc_variables_file|
-EOF
-
-    sed -i "$replacements" "$install_ids_script"
-
-    # Run the script
     echo "Mounting IDS Server..."
-    "$install_ids_script"
-
-    # Remove configuration file from the script
-    sed -i '10s|.*||; 11s|.*||; 12s|.*||; 13s|.*||' "$install_ids_script"
+    "$install_ids_script" -c $config_file -v $vpc_variables_file
 fi

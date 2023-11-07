@@ -1,15 +1,17 @@
 #!/bin/bash
 
-##############################################################
-########################### WARNING ########################## 
-##                                                          ##
-## Keep lines 10-13 empty                                   ##
-## The main script will write some variables on these lines ##
-## If the lines are not empty, they will be overwritten     ##
-##############################################################
+# Retrieves command parameters
+while getopts k:b: flag
+do
+	case "${flag}" in
+		c) config_file=${OPTARG};;
+		v) vpc_variables_file=${OPTARG};;
+	esac
+done
 
-
-
+# Import variables into the script
+source $config_file
+source $vpc_variables_file
 
 ##########################
 ## IDS SERVICE MOUNTING ##

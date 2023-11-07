@@ -1,13 +1,14 @@
 #!/bin/bash
 
-##############################################################
-########################### WARNING ########################## 
-##                                                          ##
-## Keep lines 10-11 empty                                   ##
-## The main script will write some variables on these lines ##
-## If the lines are not empty, they will be overwritten     ##
-##############################################################
+# Retrieves command parameters
+while getopts k:b: flag
+do
+	case "${flag}" in
+		c) config_file=${OPTARG};;
+	esac
+done
 
+source $config_file
 
 #############################
 ## 1. VPC SERVICE MOUNTING ##
@@ -229,10 +230,8 @@ while true; do
         echo "- Executing commands using SSH protocol..."
         ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
             "wget $repository_path/utils/install_webserver.sh; \
-	        sed -i '2s|.*|repository_path=${repository_path}|' ./install_webserver.sh; \
-            sed -i '3s|.*|traffic_mirroring=${traffic_mirroring}|' ./install_webserver.sh; \
             sudo chmod +x ./install_webserver.sh; \
-            sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4"
+            sudo bash ./install_webserver.sh -k $keyname -b $db_ipv4 -r $repository_path -t $traffic_mirroring"
         break
 	fi
 	sleep 10

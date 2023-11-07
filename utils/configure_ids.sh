@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Retrieves command parameters
 while getopts k:b: flag
 do

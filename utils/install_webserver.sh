@@ -1,12 +1,13 @@
 #!/bin/bash
 
-
 # Retrieves command parameters
 while getopts k:b: flag
 do
 	case "${flag}" in
 		k) key=${OPTARG};;
 		b) db=${OPTARG};;
+		r) repository_path=${OPTARG};;
+		t) traffic_mirroring=${OPTARG};;
 	esac
 done
 
@@ -33,9 +34,9 @@ mkdir /var/www/html/website/
 cd /var/www/html/
 sudo git clone http://github.com/Rinkish/Sqli_Edited_Version
 sudo mv /var/www/html/Sqli_Edited_Version/sqlilabs/ /var/www/html/sqli
-sed -i s/localhost/$db/g /var/www/html/sqli/sql-connections/db-creds.inc # change localhost to db server ip
-sed -i s/root/aws/g /var/www/html/sqli/sql-connections/db-creds.inc # change root to aws
-sed -i s/\$dbpass\ \=\'\'/\$dbpass\ \=\'pass\'/g /var/www/html/sqli/sql-connections/db-creds.inc # change '' to pass
+sed -i s/localhost/$db/g /var/www/html/sqli/sql-connections/db-creds.inc 						  # change localhost to db server ip
+sed -i s/root/aws/g /var/www/html/sqli/sql-connections/db-creds.inc 							  # change root to aws
+sed -i s/\$dbpass\ \=\'\'/\$dbpass\ \=\'pass\'/g /var/www/html/sqli/sql-connections/db-creds.inc  # change '' to pass
 sudo systemctl restart apache2
 
 

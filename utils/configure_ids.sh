@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo -e "\n\n\n$network_interface_id\n\n\n"
+
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install snort -y

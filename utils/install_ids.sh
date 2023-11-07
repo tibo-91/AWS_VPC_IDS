@@ -108,6 +108,7 @@ while true; do
 		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
             "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
                 'wget $repository_path/utils/configure_ids.sh; \
+				sed -i '\''2s|.*|network_interface_id=${network_interface_id}|\'' ./configure_ids.sh; \
                 sudo chmod +x ./configure_ids.sh; \
                 sudo bash ./configure_ids.sh'"
 		break

@@ -277,15 +277,3 @@ db_server_id='$db_server_id'
 web_ipv4='$web_ipv4'
 db_ipv4='$db_ipv4'
 EOF
-
-cat <<EOF
-
-
-=========================================================================================
-
-The servers has been configured. 
-You can access to the URL http://$web_ipv4/sqli/ to ensure that it is working well.
-
-=========================================================================================
-
-EOF

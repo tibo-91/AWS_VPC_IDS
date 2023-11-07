@@ -88,6 +88,7 @@ while true; do
 			--instance-ids $web_server_id \
 			--output text \
 			--query "Reservations[0].Instances[0].NetworkInterfaces[0].NetworkInterfaceId"`
+		echo "- The network interface ID of the Web Server is $network_interface_web_id"
 
 		# Mirrors target and filter
         mirror_target_id=`aws ec2 create-traffic-mirror-target \
@@ -101,13 +102,26 @@ while true; do
 			--query "TrafficMirrorFilter.TrafficMirrorFilterId"`
         echo "- The traffic mirror filter $mirror_filter_id has been created"
 
+		# Filter rule
+		aws ec2 create-traffic-mirror-filter-rule \
+			--description "TCP Rule" \
+			--traffic-direction ingress \
+			--source-cidr-block $public_subnet_cidr \
+			--destination-cidr-block $private_subnet_cidr \
+			--protocol 6 \
+			--rule-number 1 \
+			--rule-action accept \
+			--traffic-mirror-filter-id $mirror_filter_id > /dev/null
+
 		# Traffic mirror session
         traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
             --network-interface-id $network_interface_web_id \
             --traffic-mirror-target-id $mirror_target_id \
             --traffic-mirror-filter-id $mirror_filter_id \
-            --session-number 1`
-        echo -e "- The traffic mirror session has been created:\n$traffic_mirror_session_id"
+            --session-number 1 \
+			--output text \
+			--query "TrafficMirrorSession.TrafficMirrorSessionId"`
+        echo -e "- The traffic mirror session $traffic_mirror_session_id has been created"
         
 		######################
 		## Installing Snort ##
@@ -130,9 +144,11 @@ cat <<EOF
 
 =========================================================================================
 
-The IDS has been configured. 
-You can make a SSH connection to the IDS Server using the following commands:
+The servers has been configured. 
 
+To access to the Web Server, go to: http://$web_ipv4/sqli/
+
+To make a SSH connection to the IDS server, use the following commands:
 ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
 ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4
 

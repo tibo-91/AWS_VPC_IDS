@@ -31,7 +31,7 @@ echo "- IDS Server security group $ids_secgrp_id has been created"
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
 	--protocol all \
-	--cidr $vpc_id > /dev/null
+	--cidr $vpc_cidr > /dev/null
 
 #aws ec2 authorize-security-group-ingress \
 #	--group-id $ids_secgrp_id \

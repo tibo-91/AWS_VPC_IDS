@@ -66,7 +66,12 @@ while true; do
 		ids_ipv4=`aws ec2 describe-instances \
 			--instance-ids $ids_server_id \
 			--query "Reservations[0].Instances[0].PrivateIpAddress" | grep -Eo "[0-9.]+"`
+
+		echo "- IDS Server IP is: $ids_ipv4"
 			
+		echo "- Sending SSH public key to the IDS Server $ids_server_id"
+		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$ids_ipv4:~/.ssh/
+		echo "- Executing commands using SSH protocol..."
 		ssh -i ~/.ssh/$keyname \
 		    -t ubuntu@$ids_ipv4 \
             "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t 'wget $repository_path/utils/configure_ids.sh'; \

@@ -229,7 +229,7 @@ while true; do
             --instance-ids $db_server_id \
             --query "Reservations[0].Instances[0].PrivateIpAddress" | grep -Eo "[0-9.]+"`
 		
-        echo "- Servers IP's are: Web=$web_ipv4; DB=$db_ipv4"
+        echo "- Servers' IP are: Web=$web_ipv4; DB=$db_ipv4"
 
 		echo "- Sending SSH public key to the Web Server $web_server_id"
         scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/

@@ -87,7 +87,7 @@ while true; do
 			--output text \
 			--query "Reservations[0].Instances[0].NetworkInterfaces[0].NetworkInterfaceId"`
 
-		# Mirrors
+		# Mirrors target and filter
         mirror_target_id=`aws ec2 create-traffic-mirror-target \
 			--network-interface-id $network_interface_ids_id \
 			--output text \

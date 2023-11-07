@@ -92,6 +92,7 @@ while true; do
 			--query "TrafficMirrorFilter.TrafficMirrorFilterId"`
         echo "- The traffic mirror filter $mirror_filter_id has been created"
 
+		sleep 10
         traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
             --network-interface-id $network_interface_id \
             --traffic-mirror-target-id $mirror_target_id \
@@ -112,9 +113,10 @@ while true; do
 		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
             "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
                 'wget $repository_path/utils/configure_ids.sh'; \
-                $sed_command_network_interface ./configure_ids.sh; \
                 sudo chmod +x ./configure_ids.sh; \
                 sudo bash ./configure_ids.sh"
+
+                # $sed_command_network_interface ./configure_ids.sh; \
 		break
 	fi
     sleep 10

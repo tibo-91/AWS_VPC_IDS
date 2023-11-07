@@ -7,10 +7,10 @@
 ## The main script will write some variables on these lines ##
 ## If the lines are not empty, they will be overwritten     ##
 ##############################################################
-config_file=cfg/config.ini
-source cfg/config.ini
-vpc_variables_file=cfg/vpc_variables.ini
-source cfg/vpc_variables.ini
+
+
+
+
 #############################
 ## 1. IDS SERVICE MOUNTING ##
 #############################
@@ -94,8 +94,8 @@ while true; do
 
         traffic_mirror_session_id=`aws ec2 create-traffic-mirror-session \
             --network-interface-id $network_interface_id \
-            --traffic-mirror-target-id mirror_target_id \
-            --traffic-mirror-filter-id mirror_filter_id \
+            --traffic-mirror-target-id $mirror_target_id \
+            --traffic-mirror-filter-id $mirror_filter_id \
             --session-number 1`
         echo "- The traffic mirror session $traffic_mirror_session_id has been created"
         
@@ -103,15 +103,16 @@ while true; do
 		## Installing Snort ##
 		######################
 
+		sed_command_network_interface=sed -i '2s|.*|network_interface_id=${network_interface_id}|'		
+
 		echo -e "\n Installing Snort on IDS..."
 		echo "- Sending SSH public key to the IDS Server $ids_server_id"
 		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$ids_ipv4:~/.ssh/
 		echo "- Executing commands using SSH protocol..."
-		ssh -i ~/.ssh/$keyname \
-		    -t ubuntu@$web_ipv4 \
-            "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t \
+		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
+            "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
                 'wget $repository_path/utils/configure_ids.sh'; \
-                sed -i '2s|.*|network_interface_id=${network_interface_id}|' ./configure_ids.sh; \
+                $sed_command_network_interface ./configure_ids.sh; \
                 sudo chmod +x ./configure_ids.sh; \
                 sudo bash ./configure_ids.sh"
 		break

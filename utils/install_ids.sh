@@ -7,10 +7,10 @@
 ## The main script will write some variables on these lines ##
 ## If the lines are not empty, they will be overwritten     ##
 ##############################################################
-
-
-
-
+config_file=cfg/config.ini
+source cfg/config.ini
+vpc_variables_file=cfg/vpc_variables.ini
+source cfg/vpc_variables.ini
 #############################
 ## 1. IDS SERVICE MOUNTING ##
 #############################
@@ -103,7 +103,7 @@ while true; do
 		scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$ids_ipv4:~/.ssh/
 		echo "- Executing commands using SSH protocol..."
 		ssh -i ~/.ssh/$keyname \
-		    -t ubuntu@$ids_ipv4 \
+		    -t ubuntu@$web_ipv4 \
             "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4 -t \
                 'wget $repository_path/utils/configure_ids.sh'; \
                 sed -i '2s|.*|network_interface_id=${network_interface_id}|' ./configure_ids.sh; \

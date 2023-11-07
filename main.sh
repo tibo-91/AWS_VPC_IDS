@@ -55,6 +55,6 @@ fi
 
 # Run the script with variables
 if [ $traffic_mirroring -eq 1 ]; then
-    echo "Mounting IDS Server..."
+    echo -e "\nMounting IDS Server..."
     "$install_ids_script" -c "$config_file" -v "$vpc_variables_file"
 fi

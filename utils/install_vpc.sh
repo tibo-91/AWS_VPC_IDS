@@ -13,8 +13,6 @@
 ## 1. VPC SERVICE MOUNTING ##
 #############################
 
-echo "Mounting VPC server..."
-
 # VPC 
 vpc_id=`aws ec2 create-vpc \
     --cidr-block $vpc_cidr \

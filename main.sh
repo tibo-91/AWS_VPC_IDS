@@ -45,6 +45,7 @@ EOF
 sed -i "$replacements" "$install_vpc_script"
 
 # Run the script
+echo "Mounting VPC server..."
 "$install_vpc_script"
 
 # Remove configuration file from the script
@@ -75,6 +76,7 @@ EOF
     sed -i "$replacements" "$install_ids_script"
 
     # Run the script
+    echo "Mounting IDS Server..."
     "$install_ids_script"
 
     # Remove configuration file from the script

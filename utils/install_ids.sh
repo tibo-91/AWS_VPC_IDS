@@ -15,9 +15,6 @@
 ## 1. IDS SERVICE MOUNTING ##
 #############################
 
-echo "Mounting IDS Server..."
-
-
 # Security Group
 ids_secgrp_id=`aws ec2 create-security-group \
 	--description "Security Group for the Snort IDS Server" \

@@ -37,7 +37,7 @@ aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
 	--protocol tcp \
 	--port $ssh_port \
-	--cidr $public_subnet_cidr > /dev/null
+	--cidr $vpc_cidr > /dev/null
 
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \

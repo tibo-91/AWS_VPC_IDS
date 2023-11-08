@@ -28,9 +28,16 @@ ids_secgrp_id=`aws ec2 create-security-group \
 echo "- IDS Server security group $ids_secgrp_id has been created"
 
 # Inbound rule (accept everything)
+#aws ec2 authorize-security-group-ingress \
+#	--group-id $ids_secgrp_id \
+#	--protocol all \
+#	--cidr $vpc_cidr > /dev/null
+
+# accept only udp port 4789 (VXLAN)
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
-	--protocol all \
+	--protocol udp \
+	--port $snort_port \
 	--cidr $vpc_cidr > /dev/null
 
 # Launch IDS Server

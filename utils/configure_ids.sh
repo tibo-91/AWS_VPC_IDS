@@ -8,8 +8,12 @@ do
 	esac
 done
 
+# Set automatic configuration
+export DEBIAN_FRONTEND=noninteractive
+
+# Install and configure Snort
 sudo apt update -y
-#sudo apt upgrade -y
+sudo apt upgrade -y
 sudo apt install snort -y
 
 echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"select"; sid:1000001;)' | sudo tee -a /etc/snort/rules/local.rules

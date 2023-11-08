@@ -2,7 +2,7 @@
 
 # Install Web Server packages
 sudo yum update -y
-#sudo yum upgrade -y
+sudo yum upgrade -y
 sudo yum install mariadb105-server -y
 sudo systemctl start mariadb;
 sudo mysql --execute "CREATE USER 'aws' IDENTIFIED BY 'pass'; GRANT ALL PRIVILEGES ON * . * TO 'aws'; FLUSH PRIVILEGES;"

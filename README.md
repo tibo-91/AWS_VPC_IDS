@@ -43,7 +43,7 @@ PROJECT/
 │
 ├── main.sh
 ├── setup.sh
-├── Project.pdf
+├── project.pdf
 └── README.md
 ```
 

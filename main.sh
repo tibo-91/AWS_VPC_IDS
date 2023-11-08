@@ -58,13 +58,13 @@ if [ $traffic_mirroring -eq 0 ]; then
 
 The servers has been configured. 
 
-To access to the Web Server, go to: http://$web_ipv4/sqli/
+1) To access to the Web Server, go to the following URL: 
+http://$web_ipv4/sqli/
 
-To make a SSH connection to the Web Server, use the following commands:
-ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
+2) To display Snort logs of the Web Server, run the following command:
+ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "tail -f /var/log/snort/snort.alert.fast"
 
 =========================================================================================
-
 EOF
 fi
 
@@ -87,9 +87,10 @@ if [ $traffic_mirroring -eq 1 ]; then
 
 The servers has been configured. 
 
-To access to the Web Server, go to: http://$web_ipv4/sqli/
+1) To access to the Web Server, go to the following URL: 
+http://$web_ipv4/sqli/
 
-To make a SSH connection to the IDS server, use the following command:
+2) To display Snort logs of the IDS, run the following command:
 ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 'tail -f /var/log/snort/snort.alert.fast'"
 
 ====================================================================================================================================

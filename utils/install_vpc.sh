@@ -29,6 +29,7 @@ public_id=`aws ec2 create-subnet \
     --vpc-id $vpc_id \
     --cidr-block $public_subnet_cidr \
     --tag-specification ResourceType=subnet,Tags="[{Key=Name,Value=Public_Subnet}]" \
+    --availability-zone us-east-1a \
     --output text \
     --query "Subnet.SubnetId"`
 echo "- Public Subnet $public_id has been created"
@@ -179,29 +180,16 @@ aws ec2 import-key-pair \
 
 # Launch servers 
 echo
-while true; do
-    web_server_id=$(aws ec2 run-instances \
-        --image-id $web_image_id \
-        --instance-type $web_instance_type \
-        --security-group-id $web_secgrp_id \
-        --subnet-id $public_id \
-        --associate-public-ip-address \
-        --key-name $keyname \
-        --output text \
-        --query "Instances[0].InstanceId")
-
-    # Check the availability zone of the Web Server (t3.micro instances are not supported in us-east-1e)
-    availability_zone=$(aws ec2 describe-instances --instance-ids $web_server_id --query "Reservations[0].Instances[0].Placement.AvailabilityZone" --output text)
-    echo "- Web Server has been launched in $availability_zone"
-    
-    if [[ $availability_zone != *"us-east"* ]]; then
-        echo "- The Web Server has been launched in us-east-1e which does not support t3.micro instances. Recreating the instance..."
-        aws ec2 terminate-instances --instance-ids $web_server_id
-    else
-        echo "- Web Server has been launched with InstanceID $web_server_id"
-        break
-    fi
-done
+web_server_id=$(aws ec2 run-instances \
+    --image-id $web_image_id \
+    --instance-type $web_instance_type \
+    --security-group-id $web_secgrp_id \
+    --subnet-id $public_id \
+    --associate-public-ip-address \
+    --key-name $keyname \
+    --output text \
+    --query "Instances[0].InstanceId")
+echo "- Web Server has been launched with InstanceID $web_server_id"
 
 db_server_id=`aws ec2 run-instances \
     --image-id $db_image_id \

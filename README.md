@@ -145,6 +145,8 @@ To handle these prompts efficiently, confirm every operations by pressing `Enter
 
 ### Configuring IDS (Snort)
 
+You can choose between installing the IDS directly on the Web Server, or implementing Traffic Mirroring, by modifying the value of variable `$traffic_mirroring` in the `cfg/config.ini` file. It is important to note that IDS configuration varies according to the chosen method.
+
 #### IDS with Traffic Mirroring
 
 Once that the IDS is installed, the script may ask you to set an adress range for the local network.

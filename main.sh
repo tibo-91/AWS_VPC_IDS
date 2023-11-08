@@ -40,6 +40,16 @@ fi
 echo "Mounting VPC server..."
 "$install_vpc_script" -c "$config_file"
 
+
+# Read variables from the VPC script
+if [ -f $variables_file ]; then
+    source $variables_file
+else
+    echo "Error: Configuration file $variables_file not found."
+    exit 1
+fi
+
+# End of the script if the traffic mirroring is not enabled
 if [ $traffic_mirroring -eq 0 ]; then
     cat <<EOF
 
@@ -49,6 +59,9 @@ if [ $traffic_mirroring -eq 0 ]; then
 The servers has been configured. 
 
 To access to the Web Server, go to: http://$web_ipv4/sqli/
+
+To make a SSH connection to the Web Server, use the following commands:
+ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
 
 =========================================================================================
 
@@ -60,14 +73,6 @@ fi
 ## 2. INSTALL TRAFFIC MIRRORING ##
 ##################################
 
-# Read variables from the VPC script
-if [ -f $variables_file ]; then
-    source $variables_file
-else
-    echo "Error: Configuration file $variables_file not found."
-    exit 1
-fi
-
 # Run the script with variables
 if [ $traffic_mirroring -eq 1 ]; then
     echo -e "\nMounting IDS Server..."
@@ -77,7 +82,7 @@ if [ $traffic_mirroring -eq 1 ]; then
     source $variables_file
     cat <<EOF
 
-    
+
 =========================================================================================
 
 The servers has been configured. 

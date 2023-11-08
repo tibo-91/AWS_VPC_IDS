@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Retrieves command parameters
-while getopts n: flag
-do
-	case "${flag}" in
-		n) network_interface_ids_id=${OPTARG};;
-	esac
-done
-
 # Install and configure Snort
 sudo apt update -y
 sudo apt update -y

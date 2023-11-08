@@ -34,9 +34,9 @@ PROJECT/
 │ 
 ├── utils/
 │   ├── install_vpc.sh
-│   ├── install_webserver.sh
-│   ├── install_dbserver.sh
 │   ├── install_ids.sh
+│   ├── configure_webserver.sh
+│   ├── configure_dbserver.sh
 │   └── configure_ids.sh
 │
 ├── images/
@@ -47,19 +47,19 @@ PROJECT/
 └── README.md
 ```
 
-- `setup.sh`: This script sets up necessary permissions and AWS credentials.
+- `cfg/config.ini`: Configuration file to store environment-specific variables.
+
+- `setup.sh`: The script to set up necessary permissions and AWS credentials.
 
 - `main.sh`: The main script to initiate the deployment of the VPC and IDS.
 
-- `cfg/config.ini`: Configuration file to store environment-specific variables.
+- `utils/install_vpc.sh`: Script for deploying the VPC and configuring network resources.
 
-- `utils/install_vpc.sh`: Script for creating the VPC and configuring network resources.
+- `utils/install_ids.sh`: Script for deploying the IDS and configuring the traffic mirroring
 
-- `utils/install_webserver.sh`: Script for deploying the web server.
+- `utils/configure_webserver.sh`: Script for configuring the web server.
 
-- `utils/install_dbserver.sh`: Script for deploying the database server.
-
-- `utils/install_ids.sh`: Script for deploying the IDS.
+- `utils/configure_dbserver.sh`: Script for configuring the database server.
 
 - `utils/configure_ids.sh`: Script for configuring the IDS.
 
@@ -102,8 +102,8 @@ Follow these steps to get started with the project:
    ```
    The `main.sh` script will internally call the following scripts in order:
    - `utils/install_vpc.sh`
-   - `utils/install_webserver.sh`
-   - `utils/install_dbserver.sh`
+   - `utils/configure_webserver.sh`
+   - `utils/configure_dbserver.sh`
    - `utils/install_ids.sh`
    - `utils/configure_ids.sh`   
 

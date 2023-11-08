@@ -25,9 +25,9 @@ ssh-add /home/ubuntu/.ssh/$key
 
 # Configure DB Server
 ssh -i /home/ubuntu/.ssh/$key \
-    -t ec2-user@$db "wget $repository_path/utils/install_dbserver.sh; \
-    	sudo chmod +x ./install_dbserver.sh; \
-    	sudo bash ./install_dbserver.sh"
+    -t ec2-user@$db "wget $repository_path/utils/configure_dbserver.sh; \
+    	sudo chmod +x ./configure_dbserver.sh; \
+    	sudo bash ./configure_dbserver.sh"
 
 # Configure test site
 mkdir /var/www/html/website/

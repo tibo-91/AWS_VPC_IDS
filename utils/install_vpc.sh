@@ -249,13 +249,13 @@ done
 ## 3.STORE VARIABLES ##
 #######################
 
-echo -e "\nStoring variables into $vpc_variables_file..."
+echo -e "\nStoring variables into $variables_file..."
 
-if [ -f $vpc_variables_file ]; then
-    rm $vpc_variables_file
+if [ -f $variables_file ]; then
+    rm $variables_file
 fi
 
-cat <<EOF > $vpc_variables_file
+cat <<EOF > $variables_file
 vpc_id='$vpc_id'
 
 public_id='$public_id'

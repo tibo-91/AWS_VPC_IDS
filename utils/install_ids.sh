@@ -5,13 +5,13 @@ while getopts c:v: flag
 do
 	case "${flag}" in
 		c) config_file=${OPTARG};;
-		v) vpc_variables_file=${OPTARG};;
+		v) variables_file=${OPTARG};;
 	esac
 done
 
 # Import variables into the script
 source $config_file
-source $vpc_variables_file
+source $variables_file
 
 ##########################
 ## IDS SERVICE MOUNTING ##
@@ -152,19 +152,17 @@ while true; do
     sleep 10
 done
 
-cat <<EOF
+# Add variables to the variables file
+cat <<EOF >> $variables_file
 
+ids_secgrp_id='$ids_secgrp_id'
+ids_server_id='$ids_server_id'
+ids_ipv4='$ids_ipv4'
 
-=========================================================================================
+network_interface_ids_id='$network_interface_ids_id'
+network_interface_web_id='$network_interface_web_id'
 
-The servers has been configured. 
-
-To access to the Web Server, go to: http://$web_ipv4/sqli/
-
-To make a SSH connection to the IDS server, use the following commands:
-ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
-ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4
-
-=========================================================================================
-
+mirror_target_id='$mirror_target_id'
+mirror_filter_id='$mirror_filter_id'
+traffic_mirror_session_id='$traffic_mirror_session_id'
 EOF

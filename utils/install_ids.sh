@@ -134,12 +134,16 @@ while true; do
 		######################	
 
 		echo -e "\n Installing Snort on IDS..."
+
+		echo "- Sending configuration script to the Web Server $web_server_id"
+		scp -i ~/.ssh/$keyname $scripts_folder$config_ids_script ubuntu@$web_ipv4:~/
+
 		echo "- Executing commands using SSH protocol..."
-		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
-            "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 \
-                'wget $repository_path/utils/configure_ids.sh; \
-                sudo chmod +x ./configure_ids.sh; \
-                sudo bash ./configure_ids.sh'"
+		ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "\
+		    scp -i ~/.ssh/$keyname $config_ids_script ubuntu@$ids_ipv4:~/; \
+		    ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 '\
+		        sudo chmod +x $config_ids_script; \
+		        sudo bash $config_ids_script'"
 		break
 	fi
     sleep 10

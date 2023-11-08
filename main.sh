@@ -12,7 +12,8 @@ fi
 
 cat <<EOF
 =========================================================================================
-AI and Security Cloud Services: VPC & IDS project 
+AI and Security Cloud Services
+AWS project: VPC & IDS deployment 
 
 Authors: Sebastien BOIS - Maxime BOUET - Thibault RENOU - Yanis TAHRAT
 Date: 30/10/2023
@@ -38,7 +39,7 @@ fi
 
 # Run the script with variables
 echo "Mounting VPC server..."
-"$install_vpc_script" -c "$config_file"
+"$scripts_folder$install_vpc_script" -c "$config_file"
 
 
 # Read variables from the VPC script
@@ -76,7 +77,7 @@ fi
 # Run the script with variables
 if [ $traffic_mirroring -eq 1 ]; then
     echo -e "\nMounting IDS Server..."
-    "$install_ids_script" -c "$config_file" -v "$variables_file"
+    "$scripts_folder$install_ids_script" -c "$config_file" -v "$variables_file"
 
 
     source $variables_file

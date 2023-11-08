@@ -235,11 +235,15 @@ while true; do
 
 		echo "- Sending SSH public key to the Web Server $web_server_id"
         scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
+
+        echo "- Sending configuration scripts to the Web Server $web_server_id"
+        scp -i ~/.ssh/$keyname "$scripts_folder$config_web_script" ubuntu@$web_ipv4:~/
+        scp -i ~/.ssh/$keyname "$scripts_folder$config_db_script" ubuntu@$web_ipv4:~/
+
         echo "- Executing commands using SSH protocol..."
-        ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 \
-            "wget $repository_path/utils/configure_webserver.sh; \
-            sudo chmod +x ./configure_webserver.sh; \
-            sudo bash ./configure_webserver.sh -k $keyname -b $db_ipv4 -r $repository_path -t $traffic_mirroring"
+        ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "\
+            sudo chmod +x $config_web_script; \
+            sudo bash $config_web_script -k $keyname -b $db_ipv4 -c $config_db_script -t $traffic_mirroring"
         break
 	fi
 	sleep 10

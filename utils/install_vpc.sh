@@ -193,8 +193,8 @@ while true; do
     # Check the availability zone of the Web Server (t3.micro instances are not supported in us-east-1e)
     availability_zone=$(aws ec2 describe-instances --instance-ids $web_server_id --query "Reservations[0].Instances[0].Placement.AvailabilityZone" --output text)
     echo "- Web Server has been launched in $availability_zone"
-
-    if [[ $availability_zone == "us-east-1e" ]]; then
+    
+    if [[ $availability_zone != *"us-east"* ]]; then
         echo "- The Web Server has been launched in us-east-1e which does not support t3.micro instances. Recreating the instance..."
         aws ec2 terminate-instances --instance-ids $web_server_id
     else

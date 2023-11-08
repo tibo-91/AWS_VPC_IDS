@@ -28,6 +28,8 @@ PROJECT/
 │   ├── install_ids.sh
 │   └── configure_ids.sh
 │
+├── images/
+│
 ├── main.sh
 ├── setup.sh
 └── README.md

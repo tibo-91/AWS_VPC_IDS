@@ -27,12 +27,7 @@ ids_secgrp_id=`aws ec2 create-security-group \
 	--query "GroupId"`
 echo "- IDS Server security group $ids_secgrp_id has been created"
 
-# Inbound rule (accept everything)
-#aws ec2 authorize-security-group-ingress \
-#	--group-id $ids_secgrp_id \
-#	--protocol all \
-#	--cidr $vpc_cidr > /dev/null
-
+# Inbound rules
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
 	--protocol tcp \

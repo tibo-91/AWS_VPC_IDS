@@ -12,8 +12,8 @@ do
 done
 
 # Install Web Server packages
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade -y
+sudo apt update -y
+sudo apt upgrade -y
 sudo apt install apache2 -y
 sudo apt install php -y
 sudo apt install php-mysql -y

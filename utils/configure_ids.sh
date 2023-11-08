@@ -9,8 +9,8 @@ do
 done
 
 # Install and configure Snort
-sudo apt-get -qq update
-sudo apt-get -qq dist-upgrade -y
+sudo apt update -y
+sudo apt update -y
 sudo apt install snort -y
 
 echo 'alert tcp any any -> $HOME_NET 80 (msg:"SQL Injection attempt"; content:"select"; sid:1000001;)' | sudo tee -a /etc/snort/rules/local.rules

@@ -188,7 +188,14 @@ web_server_id=`aws ec2 run-instances \
     --key-name $keyname \
     --output text \
     --query "Instances[0].InstanceId"`
-echo "- Web Server has been launched with InstanceID $web_server_id"
+
+availability_zone=$(aws ec2 describe-instances --instance-ids $web_server_id --query "Reservations[0].Instances[0].Placement.AvailabilityZone" --output text)
+if [[ $availability_zone == "us-east-1e" ]]; then
+    echo "The Web Server has been launched in us-east-1e and does not support t3.micro instances. Please relaunch the script."
+    exit 1
+else
+    echo "Web Server has been launched with InstanceID $web_server_id"
+fi
 
 db_server_id=`aws ec2 run-instances \
     --image-id $db_image_id \

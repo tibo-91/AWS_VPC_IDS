@@ -67,13 +67,20 @@ PROJECT/
 
 Follow these steps to get started with the project:
 
-#### 1. Start an AWS Sandbox Lab instance and make sure you have the AWS CLI credentials for that instance.
+#### 1. Clone the repository
+
+   ```shell
+   git clone https://github.com/tibo-91/AWS_VPC_IDS.git
+   cd AWS_VPC_IDS/
+   ```
+
+#### 2. Start an AWS Sandbox Lab instance and make sure you have the AWS CLI credentials for that instance.
 
    ![AWS CLI credentials](images/AWS_CLI_credentials.png)
 
-#### 2. Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will remove existing SSH keys and credentials, and set up new ones. 
+#### 3. Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will remove existing SSH keys and credentials, and set up new ones. 
 
-   ```
+   ```shell
    chmod +x setup.sh
    ./setup.sh
    ```
@@ -82,9 +89,9 @@ Follow these steps to get started with the project:
 
    ![Configure AWS CLI credentials](images/setup_sh.png)
 
-#### 3. Execute the `main.sh` script to start the VPC deployment and IDS installation.
+#### 4. Execute the `main.sh` script to start the VPC deployment and IDS installation.
 
-   ```
+   ```shell
    ./main.sh
    ```
    The `main.sh` script will internally call the following scripts in order:
@@ -94,7 +101,7 @@ Follow these steps to get started with the project:
    - `utils/install_ids.sh`
    - `utils/configure_ids.sh`   
 
-#### 4. Go on the website and test the IDS by performing SQL injections.
+#### 5. Go on the website and test the IDS by performing SQL injections.
 
    Once the `main.sh` has finished running, you can follow the given commands by the output:
 

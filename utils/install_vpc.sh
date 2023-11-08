@@ -29,7 +29,7 @@ public_id=`aws ec2 create-subnet \
     --vpc-id $vpc_id \
     --cidr-block $public_subnet_cidr \
     --tag-specification ResourceType=subnet,Tags="[{Key=Name,Value=Public_Subnet}]" \
-    --availability-zone us-east-1a \
+    --availability-zone $public_subnet_az \
     --output text \
     --query "Subnet.SubnetId"`
 echo "- Public Subnet $public_id has been created"

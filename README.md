@@ -1,6 +1,17 @@
 # AWS Automation Project - VPC Deployment with IDS
 
-This project automates the deployment of an Amazon Virtual Private Cloud (VPC) with web and database servers, and an Intrusion Detection System (IDS) to detect SQL injections. The automation is performed through a set of shell scripts and AWS CLI commands. This README provides detailed information on how to set up and use this project.
+This project automates the deployment of an Amazon Virtual Private Cloud (VPC) with web and database servers, and an Intrusion Detection System (IDS) with Trafic Mirroring to detect SQL injections. The automation is performed through a set of shell scripts and AWS CLI commands. This README provides detailed information on how to set up and use this project.
+
+This project was created as part of ESIEE's AI & Security Cloud Services course. It served as a practical assignment for the course and demonstrates the skills and knowledge gained during the learning process.
+
+- **School:** ESIEE Paris
+- **Course:** AIC 5101C - AI & Security Cloud Services
+- **Instructor:** OMAR Mawloud
+- **Authors:** 
+   - BOIS Sébastien
+   - BOUET Maxime
+   - RENOU Thibault
+   - TAHRAT Yanis
 
 ## Prerequisites
 
@@ -32,6 +43,7 @@ PROJECT/
 │
 ├── main.sh
 ├── setup.sh
+├── Project.pdf
 └── README.md
 ```
 

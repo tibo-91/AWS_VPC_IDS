@@ -83,15 +83,15 @@ if [ $traffic_mirroring -eq 1 ]; then
     cat <<EOF
 
 
-=========================================================================================
+====================================================================================================================================
 
 The servers has been configured. 
 
 To access to the Web Server, go to: http://$web_ipv4/sqli/
 
 To make a SSH connection to the IDS server, use the following command:
-ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4"
+ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "ssh -i ~/.ssh/$keyname -t ubuntu@$ids_ipv4 'tail -f /var/log/snort/snort.alert.fast'"
 
-=========================================================================================
+====================================================================================================================================
 EOF
 fi

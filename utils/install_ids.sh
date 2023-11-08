@@ -119,8 +119,9 @@ while true; do
 		aws ec2 create-traffic-mirror-filter-rule \
 			--description "TCP Rule" \
 			--traffic-direction ingress \
-			--source-cidr-block $public_subnet_cidr \
-			--destination-cidr-block $private_subnet_cidr \
+			--source-cidr-block $web_in_rule_cidr \
+			--destination-cidr-block $public_subnet_cidr \
+			--destination-port-range from=80,to=80 \
 			--protocol 6 \
 			--rule-number 1 \
 			--rule-action accept \

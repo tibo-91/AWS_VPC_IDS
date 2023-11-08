@@ -74,11 +74,15 @@ Follow these steps to get started with the project:
    cd AWS_VPC_IDS/
    ```
 
-#### 2. Start an AWS Sandbox Lab instance and make sure you have the AWS CLI credentials for that instance.
+#### 2. Start an AWS Sandbox Lab
+
+   Launch an AWS Sandbox instance and make sure you can access the AWS CLI credentials for that instance.
 
    ![AWS CLI credentials](images/AWS_CLI_credentials.png)
 
-#### 3. Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will remove existing SSH keys and credentials, and set up new ones. 
+#### 3. Run the `setup.sh` script
+
+   Set execution rights and run the `setup.sh` script to configure AWS CLI credentials. This script will give execution rights, remove existing SSH keys and credentials, and set up new ones. 
 
    ```shell
    chmod +x setup.sh
@@ -89,7 +93,9 @@ Follow these steps to get started with the project:
 
    ![Configure AWS CLI credentials](images/setup_sh.png)
 
-#### 4. Execute the `main.sh` script to start the VPC deployment and IDS installation.
+#### 4. Run the `main.sh` script
+
+   Execute the `main.sh` script to start the VPC deployment and IDS installation.
 
    ```shell
    ./main.sh
@@ -101,13 +107,14 @@ Follow these steps to get started with the project:
    - `utils/install_ids.sh`
    - `utils/configure_ids.sh`   
 
-#### 5. Go on the website and test the IDS by performing SQL injections.
+#### 5. Test the IDS
 
-   Once the `main.sh` has finished running, you can follow the given commands by the output:
+   Once the `main.sh` has finished running, you can go on the website and test the IDS by performing SQL injections.
+   To do so, you can follow the given indications by the output:
 
    ![Main output](images/main_output.png)
 
-   You can click on the URL to go on the website, then you will have to setup the database for the lab as it follows:
+   You can click on the URL to go on the website, and you will have to setup the database for the lab as it follows:
 
    ![Setting up the database](images/setup_db.png)
    ![Setting up the database](images/setup_db2.png)

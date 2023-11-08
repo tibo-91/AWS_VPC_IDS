@@ -33,7 +33,12 @@ echo "- IDS Server security group $ids_secgrp_id has been created"
 #	--protocol all \
 #	--cidr $vpc_cidr > /dev/null
 
-# accept only udp port 4789 (VXLAN)
+aws ec2 authorize-security-group-ingress \
+	--group-id $ids_secgrp_id \
+	--protocol tcp \
+	--port $ssh_port \
+	--cidr $public_subnet_cidr > /dev/null
+
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
 	--protocol udp \

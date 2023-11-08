@@ -89,9 +89,8 @@ The servers has been configured.
 
 To access to the Web Server, go to: http://$web_ipv4/sqli/
 
-To make a SSH connection to the IDS server, use the following commands:
-ssh -i ~/.ssh/$keyname ubuntu@$web_ipv4
-ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4
+To make a SSH connection to the IDS server, use the following command:
+ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "ssh -i ~/.ssh/$keyname ubuntu@$ids_ipv4"
 
 =========================================================================================
 EOF

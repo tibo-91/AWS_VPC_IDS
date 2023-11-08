@@ -121,7 +121,7 @@ while true; do
 			--traffic-direction ingress \
 			--source-cidr-block $web_in_rule_cidr \
 			--destination-cidr-block $public_subnet_cidr \
-			--destination-port-range from=80,to=80 \
+			--destination-port-range FromPort=80,ToPort=80 \
 			--protocol 6 \
 			--rule-number 1 \
 			--rule-action accept \

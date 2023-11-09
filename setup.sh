@@ -19,7 +19,7 @@ fi
 ##############################
 
 chmod +x ./*.sh
-chmod +x ./utils/*.sh
+chmod +x $scripts_folder/*.sh
 echo "1) Execution rights have been given to all scripts"
 
 

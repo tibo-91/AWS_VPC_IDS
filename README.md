@@ -66,7 +66,7 @@ PROJECT/
 ## Getting Started
 
 Follow these steps to get started with the project.
-To see how the project can be run, follows the instructions or watch the video [here](video_link).
+To see how the project works, you can also have look on the video [here](https://youtu.be/ACBhz8wi9AQ).
 
 #### 1. Clone the repository
 

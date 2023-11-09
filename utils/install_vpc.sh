@@ -202,7 +202,7 @@ db_server_id=`aws ec2 run-instances \
 echo "- DB Server has been launched with InstanceID $db_server_id"
 
 
-# Update and install packages
+# Update and install packages on instances
 echo -e "\nWaiting for the servers to be ready..."
 while true; do
 
@@ -218,6 +218,7 @@ while true; do
 
     echo "- Servers' current state: Web=$web_status ($web_server_id) | DB=$db_status ($db_server_id)"
 
+    # When both servers are running, the script can continue
     if [[ "$web_status" == "running" && "$db_status" == "running" ]]; then
         sleep 10
 		echo -e "\nServers are ready to be configured!"
@@ -233,13 +234,16 @@ while true; do
 		
         echo "- Servers' IP are: Web=$web_ipv4; DB=$db_ipv4"
 
+        # Send SSH public key to the Web Server
 		echo "- Sending SSH public key to the Web Server $web_server_id"
         scp -i ~/.ssh/$keyname ~/.ssh/$keyname ubuntu@$web_ipv4:~/.ssh/
 
+        # Send configuration scripts to the Web Server (to configure the Web and DB Servers)
         echo "- Sending configuration scripts to the Web Server $web_server_id"
         scp -i ~/.ssh/$keyname "$scripts_folder$config_web_script" ubuntu@$web_ipv4:~/
         scp -i ~/.ssh/$keyname "$scripts_folder$config_db_script" ubuntu@$web_ipv4:~/
 
+        # Execute configuration script for the Web Server
         echo "- Executing commands using SSH protocol..."
         ssh -i ~/.ssh/$keyname -t ubuntu@$web_ipv4 "\
             sudo chmod +x $config_web_script; \

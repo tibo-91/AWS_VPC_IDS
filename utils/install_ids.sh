@@ -64,7 +64,7 @@ while true; do
 
     echo "- Server's current state: IDS=$ids_status ($ids_server_id)"
 
-
+	# When the server is running, configure it
 	if [[ "$ids_status" == "running" ]]; then
 		sleep 5
 		echo -e "\nIDS Server is ready to be configured!"

@@ -26,6 +26,7 @@ The data will be printed in the tab 'Details'.
 
 EOF
 
+# Check Traffic Mirroring parameter
 if [ $traffic_mirroring -eq 1 ]; then
     echo -e "The IDS will be installed using Traffic Mirroring.\n"
 else
@@ -50,7 +51,7 @@ else
     exit 1
 fi
 
-# End of the script if the traffic mirroring is not enabled
+# End of the script (traffic mirroring disabled)
 if [ $traffic_mirroring -eq 0 ]; then
     cat <<EOF
 
@@ -79,8 +80,10 @@ if [ $traffic_mirroring -eq 1 ]; then
     echo -e "\nMounting IDS Server..."
     "$scripts_folder$install_ids_script" -c "$config_file" -v "$variables_file"
 
-
+    # Read variables from the IDS script
     source $variables_file
+
+    # End of the script (traffic mirroring enabled)
     cat <<EOF
 
 

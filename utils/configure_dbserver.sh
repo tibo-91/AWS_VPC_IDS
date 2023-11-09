@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Web Server packages
+# Install DB Server packages
 sudo yum update -y
 sudo yum upgrade -y
 sudo yum install mariadb105-server -y

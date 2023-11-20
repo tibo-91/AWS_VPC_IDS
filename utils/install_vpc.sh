@@ -144,7 +144,7 @@ echo "- DB Server security group $db_secgrp_id has been created"
 aws ec2 authorize-security-group-ingress \
     --group-id $web_secgrp_id \
     --protocol tcp \
-    --port $web_port \
+    --port $web_port \ 
     --cidr $web_in_rule_cidr > /dev/null 
 echo "- Web Server Security Group $web_secgrp_id: Authorizing incoming TCP request on port $web_port for $web_in_rule_cidr"
 
@@ -158,7 +158,7 @@ echo "- Web Server Security Group $web_secgrp_id: Authorizing incoming TCP reque
 aws ec2 authorize-security-group-ingress \
     --group-id $db_secgrp_id \
     --protocol tcp \
-    --port $db_port \
+    --port $db_port \ 
     --cidr $db_in_rule_cidr > /dev/null
 echo "- DB Server Security Group $db_secgrp_id: Authorizing incoming TCP request on port $db_port for $db_in_rule_cidr"
 

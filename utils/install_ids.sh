@@ -37,7 +37,7 @@ aws ec2 authorize-security-group-ingress \
 aws ec2 authorize-security-group-ingress \
 	--group-id $ids_secgrp_id \
 	--protocol udp \
-	--port $snort_port \
+	--port $snort_port \ 
 	--cidr $vpc_cidr > /dev/null
 
 # Launch IDS Server
